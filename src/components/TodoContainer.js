@@ -22,11 +22,24 @@ class ToDoContainer extends React.Component{
     }
   ]
   };
+  handleChecked = (id) => {
+    this.setState(prevState =>({ 
+      todos: prevState.todos.map(todo => {
+        if(todo.id === id){
+          return {
+            ...todo,
+            completed : !todo.completed,
+          }
+        }
+        return todo;
+      })
+    }));
+  }
   render(){
       return (
         <React.Fragment>
           <Header/>
-          <ToDoList todos = {this.state.todos}/>
+          <ToDoList todos = {this.state.todos} handler = {this.handleChecked}/>
         </React.Fragment>
       );
   }   

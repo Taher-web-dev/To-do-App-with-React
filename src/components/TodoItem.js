@@ -1,8 +1,12 @@
 import React from "react";
 class TodoItem extends React.Component{
   render(){
+    const {completed, id, handler, title} = this.props;
     return (
-      <li>{this.props.title}</li>
+      <li>
+        <input type = "checkbox" checked = {completed} onChange = {()=>handler(id)}/>
+        {title}
+      </li>
     );
   }
 }
