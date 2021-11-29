@@ -1,22 +1,24 @@
 import React from "react";
 import ToDoList from "./TodosList";
 import Header from "./Header";
+import InputToDo from "./InputToDo";
+import { v4 as uuidv4 } from "uuid";
 
 class ToDoContainer extends React.Component{
   state = {
   todos: [
     {
-      id: 1,
+      id: uuidv4(),
       title: "Setup development environment",
       completed: true
     },
     {
-      id: 2,
+      id: uuidv4(),
       title: "Develop website and add content",
       completed: false
     },
     {
-      id: 3,
+      id: uuidv4(),
       title: "Deploy to live server",
       completed: false
     }
@@ -35,11 +37,31 @@ class ToDoContainer extends React.Component{
       })
     }));
   }
+  deleteHandler = (id) => {
+    this.setState( prevState => ({
+      todos: prevState.todos.filter(todo => {
+          return todo.id !== id;
+      })
+    }));
+  }
+  addTask = (tit) => {
+    this.setState({
+      todos: [
+        ...this.state.todos , 
+        {
+          id: uuidv4(),
+          title: tit,
+          completed: false,
+        }
+      ]
+    });
+  }
   render(){
       return (
         <React.Fragment>
           <Header/>
-          <ToDoList todos = {this.state.todos} handler = {this.handleChecked}/>
+          <InputToDo addTask = {this.addTask}/>
+          <ToDoList todos = {this.state.todos} handler = {this.handleChecked} deleteHandler = {this.deleteHandler}/>
         </React.Fragment>
       );
   }   
