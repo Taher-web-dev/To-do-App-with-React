@@ -58,11 +58,13 @@ class ToDoContainer extends React.Component{
   }
   render(){
       return (
-        <React.Fragment>
-          <Header/>
-          <InputToDo addTask = {this.addTask}/>
-          <ToDoList todos = {this.state.todos} handler = {this.handleChecked} deleteHandler = {this.deleteHandler}/>
-        </React.Fragment>
+        <div className = 'container'>
+          <div className = 'inner'>
+            <Header/>
+            <InputToDo addTask = {this.addTask}/>
+            <ToDoList todos = {this.state.todos} handler = {this.handleChecked} deleteHandler = {this.deleteHandler}/>
+          </div>
+        </div>
       );
   }   
 }
