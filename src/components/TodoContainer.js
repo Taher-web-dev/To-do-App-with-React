@@ -56,13 +56,31 @@ class ToDoContainer extends React.Component{
       ]
     });
   }
+  editTask = (id,tit) => {
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo => {
+        if(todo.id === id){
+          return {
+            ...todo,
+            title: tit,
+          };
+        }
+        return todo;
+      })
+    }))
+  }
   render(){
       return (
         <div className = 'container'>
           <div className = 'inner'>
             <Header/>
             <InputToDo addTask = {this.addTask}/>
-            <ToDoList todos = {this.state.todos} handler = {this.handleChecked} deleteHandler = {this.deleteHandler}/>
+            <ToDoList 
+            todos = {this.state.todos} 
+            handler = {this.handleChecked} 
+            deleteHandler = {this.deleteHandler}
+            editHandler = {this.editTask}
+            />
           </div>
         </div>
       );
